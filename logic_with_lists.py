@@ -76,9 +76,13 @@ class Set:
         #prompt to ingest a series of real numbers
         #check to ensure that these numbers are actually real numbers and not alpha
         #handle errors
-        #assign set to class attrib AND return Bool to indicate success/failure
+        #assign set to class attrib AND return Bool to indicate success/failure:
 
+    def maximum(self):
+        #return max value
 
+    def minimum(self):
+        #return min value
 
 if __name__ == "__main__":
     main()
