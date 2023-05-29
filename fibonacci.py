@@ -33,17 +33,20 @@ def print_intro():
 
 def create_fib_list():
     fib_list = [1,1]
-    num_entries = input("\nHow many entries in the sequence would you like to generate (or q to quit)?")
+    num_entries = input("\nHow many entries in the sequence would you like to generate (or q to quit)?").strip()
     if num_entries != 'q':
         while not str.isnumeric(num_entries) or int(num_entries) < 2:
             print("\nThe quantity of desired entries must be a whole number greater than 2.")
-            num_entries = input("Please re-enter your desired sequence length (or q to quit): ")
-        num_entries = int(num_entries)
-        for _ in range(2,num_entries):
-            fib_list.append(fib_list[_-2]+fib_list[_-1])
-        return fib_list
+            num_entries = input("Please re-enter your desired sequence length (or q to quit): ").strip()
+        if num_entries != 'q':
+            num_entries = int(num_entries)
+            for _ in range(2,num_entries):
+                fib_list.append(fib_list[_-2]+fib_list[_-1])
+            return fib_list
     else:
-        return None
+        break
+    return None
+
 
 def valid_menu_choice(choice) -> bool:
     if choice == 'p' or choice == '<' or choice =='o' or choice == 'e' or choice == 'n' or choice =='q':
@@ -61,14 +64,14 @@ def main_menu_handler(fib_list: list) -> str:
         print("(e) Print out all even numbers in your list.")
         print("(n) Generate a new list.")
         print("(q) End program.")
-        menu_choice = input("SELECTION: ")
+        menu_choice = input("SELECTION: ").strip()
     return menu_choice
 
 def less_than_option(fib_list: list) -> list:
-    upper_b = input("\nEnter your desired upper bound: ")
+    upper_b = input("\nEnter your desired upper bound: ").strip()
     while not str.isnumeric(upper_b) or int(upper_b)>fib_list[len(fib_list) - 1 or int(upper_b)<1]:
         print(f"\nThe maximum value must be a whole number between 1 and {fib_list[len(fib_list)-1]}, inclusive.")
-        upper_b = input("Please re-enter your desired upper bound: ")
+        upper_b = input("Please re-enter your desired upper bound: ").strip()
     upper_b = int(upper_b)
     bounded_list = []
     for _ in fib_list:
