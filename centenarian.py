@@ -3,8 +3,8 @@ import datetime
 
 def main():
     new_user = User()
-    new_user.name = new_user.assign_name()
-    new_user.age = new_user.assign_age()
+    new_user.assign_name()
+    new_user.assign_age()
 
     current_year = datetime.date.today().year
     new_user_100th = new_user.calc_100th(current_year)
@@ -21,10 +21,10 @@ class User:
         self.name = name
         self.age = age
 
-    def assign_name(self) -> str:
-        return input("Please enter your name:")
+    def assign_name(self):
+        self.name = str.strip(input("Please enter your name:"))
 
-    def assign_age(self) -> int:
+    def assign_age(self):
         acceptable_age = False
         test_age = input("Please enter your age in years:")
         while not acceptable_age:
@@ -33,7 +33,7 @@ class User:
             else:
                 print("Your age must a positive whole number of years.")
                 test_age = input("Please re-enter your age:")
-        return int(test_age)
+        self.age = int(test_age)
 
     def calc_100th(self, current_year: int) -> int:
         return current_year + (100-self.age)
