@@ -20,7 +20,6 @@ def main():
                     print("<<<Closing factorization program>>>")
 
 
-
 def create_factors_list() -> list:
     factors_list = []
     num = input("\nEnter a positive integer to factorize (or q to quit): ").strip()
@@ -28,9 +27,9 @@ def create_factors_list() -> list:
         while not str.isnumeric(num) or int(num) < 1 or num == 'q':
             print("\nYou must enter a positive integer (i.e., whole number greater than 0).")
             num = input("Please re-enter your desired number (or q to quit): ").strip()
-        if(num != 'q'):
+        if num != 'q':
             num = int(num)
-            for _ in range(1,num+1):
+            for _ in range(1, num+1):
                 if num % _ == 0:
                     factors_list.append(_)
             return factors_list
@@ -44,8 +43,9 @@ def intro():
     print("\n\n\nThis program provides the factors for a given positive integer.")
     print("The factors of a positive integer are those positive integers that evenly divide it (remainder of 0).")
 
+
 def valid_menu_choice(choice) -> bool:
-    if choice == 'p' or choice == 'n' or choice =='q':
+    if choice == 'p' or choice == 'n' or choice == 'q':
         return True
     else:
         return False
