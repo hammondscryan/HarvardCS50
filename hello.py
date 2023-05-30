@@ -1,7 +1,8 @@
-import os
 import logging
 
 logger = logging.Logger(__name__)
+
+
 def main():
     print(f"hello.py = {__name__}")
 
@@ -26,16 +27,18 @@ class MathFuncs:
             return self.input_param ** 2
         except TypeError as e:
             logger.warning(
-                f"You can't square a {type(self.input_param_modified)}!",
+                f"You can't square a {type(self.input_param)}!",
                 exc_info=True
             )
+
     def is_even(self) -> bool:
         try:
             return self.input_param % 2 == 0
         except TypeError:
             logger.warning(
-                f"A {str(type(self.input_param_modified))} can't be evaluated as even or odd!"
+                f"A {str(type(self.input_param))} can't be evaluated as even or odd!"
             )
+
 
 if __name__ == "__main__":
     main()

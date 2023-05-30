@@ -31,8 +31,9 @@ def print_intro():
     print("So, n should be greater than or equal to 2.")
     print("Enter q to quit.")
 
+
 def create_fib_list():
-    fib_list = [1,1]
+    fib_list = [1, 1]
     num_entries = input("\nHow many entries in the sequence would you like to generate (or q to quit)?").strip()
     if num_entries != 'q':
         while not str.isnumeric(num_entries) or int(num_entries) < 2:
@@ -40,19 +41,19 @@ def create_fib_list():
             num_entries = input("Please re-enter your desired sequence length (or q to quit): ").strip()
         if num_entries != 'q':
             num_entries = int(num_entries)
-            for _ in range(2,num_entries):
+            for _ in range(2, num_entries):
                 fib_list.append(fib_list[_-2]+fib_list[_-1])
             return fib_list
     else:
-        break
-    return None
+        return None
 
 
 def valid_menu_choice(choice) -> bool:
-    if choice == 'p' or choice == '<' or choice =='o' or choice == 'e' or choice == 'n' or choice =='q':
+    if choice == 'p' or choice == '<' or choice == 'o' or choice == 'e' or choice == 'n' or choice == 'q':
         return True
     else:
         return False
+
 
 def main_menu_handler(fib_list: list) -> str:
     menu_choice = ''
@@ -67,9 +68,10 @@ def main_menu_handler(fib_list: list) -> str:
         menu_choice = input("SELECTION: ").strip()
     return menu_choice
 
+
 def less_than_option(fib_list: list) -> list:
     upper_b = input("\nEnter your desired upper bound: ").strip()
-    while not str.isnumeric(upper_b) or int(upper_b)>fib_list[len(fib_list) - 1 or int(upper_b)<1]:
+    while not str.isnumeric(upper_b) or int(upper_b) > fib_list[len(fib_list) - 1 or int(upper_b) < 1]:
         print(f"\nThe maximum value must be a whole number between 1 and {fib_list[len(fib_list)-1]}, inclusive.")
         upper_b = input("Please re-enter your desired upper bound: ").strip()
     upper_b = int(upper_b)
@@ -79,12 +81,14 @@ def less_than_option(fib_list: list) -> list:
             bounded_list.append(_)
     return bounded_list
 
+
 def odd_option(fib_list: list) -> list:
     odd_list = []
     for _ in fib_list:
         if _ % 2 == 1:
             odd_list.append(_)
     return odd_list
+
 
 def even_option(fib_list: list) -> list:
     even_list = []
@@ -96,3 +100,4 @@ def even_option(fib_list: list) -> list:
 
 if __name__ == "__main__":
     main()
+    
