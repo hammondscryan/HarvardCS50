@@ -6,12 +6,18 @@ def main():
         match menu_choice:
             case 'p':
                 print(f"\n{fib_list}")
-            case '<':
-                print(f"\n{less_than_option(fib_list)}")
+            case 'u':
+                print(f"\n{upper_bounded_list(fib_list)}")
+            case 'l':
+                l_b_list = lower_bounded_list(fib_list)
+                if l_b_list is None:
+                    print("\nTHe given lower bound is greater than all terms in your sequence.")
+                else:
+                    print(f"\n{l_b_list}")
             case 'o':
-                print(f"\n{odd_option(fib_list)}")
+                print(f"\n{odd_list(fib_list)}")
             case 'e':
-                print(f"\n{even_option(fib_list)}")
+                print(f"\n{even_list(fib_list)}")
             case 'n':
                 fib_list = create_fib_list()
             case 'q':
@@ -31,25 +37,24 @@ def create_fib_list():
         try:
             num_terms = input("How many terms in the sequence would you like to generate (or q to quit)?").strip()
             num_terms = int(num_terms)
+            assert num_terms > 1
         except ValueError:
             if num_terms == 'q':
                 exit("<<<Closing Fibonacci program>>>")
             else:
-                print("\nThe quantity of desired terms must be 2 or more.")
+                print("\nThe quantity of desired terms must be 2 or greater.")
                 pass
+        except AssertionError:
+            print("\nThe quantity of desired terms must be 2 or greater.")
         else:
-            if num_terms < 2:
-                print("\nThe quantity of desired terms must be 2 or more.")
-            else:
-                break
-    for _ in range(2, num_terms):
-        fib_list.append(fib_list[_ - 2] + fib_list[_ - 1])
-    return fib_list
+            for _ in range(2, num_terms):
+                fib_list.append(fib_list[_ - 2] + fib_list[_ - 1])
+            return fib_list
 
 
 def valid_menu_choice(choice) -> bool:
     match choice:
-        case 'p' | '<' | 'o' | 'e' | 'n' | 'q':
+        case 'p' | 'u' | 'l' | 'o' | 'e' | 'n' | 'q':
             return True
         case _:
             return False
@@ -60,7 +65,8 @@ def main_menu_handler(fib_list: list) -> str:
     while not valid_menu_choice(menu_choice):
         print("\n<<<MAKE A SELECTION>>>")
         print(f"(p) Print your sequence of {len(fib_list)} numbers.")
-        print("(<) Print all numbers less than or equal to a given number.")
+        print("(u) Print all numbers less than or equal to a given upper bound.")
+        print("(l) Print all numbers greater than or equal to a given lower bound.")
         print("(o) Print out all odd numbers in your list.")
         print("(e) Print out all even numbers in your list.")
         print("(n) Generate a new list.")
@@ -69,27 +75,50 @@ def main_menu_handler(fib_list: list) -> str:
     return menu_choice
 
 
-def less_than_option(fib_list: list) -> list:
+def upper_bounded_list(fib_list: list) -> list:
     while True:
         try:
             upper_b = input("\nEnter your desired upper bound: ").strip()
             upper_b = int(upper_b)
+            assert upper_b > 0
         except ValueError:
-            print(f"\nThe max value must be a whole number between 1 and {fib_list[len(fib_list) - 1]}, inclusive.")
+            print(f"\nThe upper bound must be a whole number of 1 or greater.")
+            pass
+        except AssertionError:
+            print(f"\nThe upper bound must be a whole number of 1 or greater.")
             pass
         else:
-            if int(upper_b) > fib_list[len(fib_list) - 1] or int(upper_b) < 1:
-                print(f"\nThe max value must be a whole number between 1 and {fib_list[len(fib_list) - 1]}, inclusive.")
+            bounded_list = []
+            for _ in fib_list:
+                if _ <= upper_b:
+                    bounded_list.append(_)
+            return bounded_list
+
+
+def lower_bounded_list(fib_list: list) -> list:
+    while True:
+        try:
+            lower_b = input("\nEnter your desired lower bound: ").strip()
+            lower_b = int(lower_b)
+            assert lower_b > 0
+        except ValueError:
+            print(f"\nThe lower bound must be a whole number of 1 or greater.")
+            pass
+        except AssertionError:
+            print(f"\nThe lower bound must be a whole number of 1 or greater.")
+            pass
+        else:
+            bounded_list = []
+            for _ in fib_list:
+                if _ >= lower_b:
+                    bounded_list.append(_)
+            if not bounded_list:
+                return None
             else:
-                break
-    bounded_list = []
-    for _ in fib_list:
-        if _ <= upper_b:
-            bounded_list.append(_)
-    return bounded_list
+                return bounded_list
 
 
-def odd_option(fib_list: list) -> list:
+def odd_list(fib_list: list) -> list:
     odd_list = []
     for _ in fib_list:
         if _ % 2 == 1:
@@ -97,7 +126,7 @@ def odd_option(fib_list: list) -> list:
     return odd_list
 
 
-def even_option(fib_list: list) -> list:
+def even_list(fib_list: list) -> list:
     even_list = []
     for _ in fib_list:
         if _ % 2 == 0:
