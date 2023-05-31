@@ -1,41 +1,38 @@
 def main():
     intro()
     factors_list = create_factors_list()
-    if factors_list is None:
-        print("\n<<<Closing factorization program>>>")
-    else:
-        menu_choice = ''
-        while menu_choice != 'q':
-            menu_choice = main_menu_handler(factors_list)
-            match menu_choice:
-                case 'p':
-                    print(f"\nThe factors of {factors_list[len(factors_list)-1]} are {factors_list}")
-                case 'n':
-                    factors_list = create_factors_list()
-                    if factors_list is None:
-                        menu_choice = 'q'
-                        print("<<<Closing factorization program>>>")
-                case 'q':
-                    print("<<<Closing factorization program>>>")
+    while True:
+        menu_choice = main_menu_handler(factors_list)
+        match menu_choice:
+            case 'p':
+                print(f"\nThe factors of {factors_list[len(factors_list)-1]} are {factors_list}")
+            case 'n':
+                factors_list = create_factors_list()
+            case 'q':
+                exit("<<<Closing factorization program>>>")
 
 
 def create_factors_list() -> list:
     factors_list = []
-    num = input("\nEnter a positive integer to factorize (or q to quit): ").strip()
-    while num != 'q':
-        while not str.isnumeric(num) or int(num) < 1 or num == 'q':
-            print("\nYou must enter a positive integer (i.e., whole number greater than 0).")
-            num = input("Please re-enter your desired number (or q to quit): ").strip()
-        if num != 'q':
+    while True:
+        try:
+            num = input("\nEnter a positive integer to factorize (or q to quit): ").strip()
             num = int(num)
-            for _ in range(1, num+1):
-                if num % _ == 0:
-                    factors_list.append(_)
-            return factors_list
+        except ValueError:
+            if num == 'q':
+                exit("<<<Closing factorization program>>>")
+            else:
+                print("\nYou must enter a positive integer (i.e., whole number greater than 0).")
+                pass
         else:
-            break
-    return None
-
+            if num<1:
+                print("\nYou must enter a positive integer (i.e., whole number greater than 0).")
+            else:
+                break
+    for _ in range(1, num+1):
+        if num % _ == 0:
+            factors_list.append(_)
+    return factors_list
 
 
 def intro():
@@ -44,10 +41,11 @@ def intro():
 
 
 def valid_menu_choice(choice) -> bool:
-    if choice == 'p' or choice == 'n' or choice == 'q':
-        return True
-    else:
-        return False
+    match choice:
+        case 'p' | 'n' | 'q':
+            return True
+        case _:
+            return False
 
 
 def main_menu_handler(factors_list: list) -> str:

@@ -21,25 +21,22 @@ def main():
                     print("<<<Closing factorization program>>>")
 
 '''
-def create_set() -> list:
-    new_set = []
-'''
-    new_set = input("\nEnter a positive integer to factorize (or q to quit): ").strip()
-    while num != 'q':
-        while not str.isnumeric(num) or int(num) < 1 or num == 'q':
-            print("\nYou must enter a positive integer (i.e., whole number greater than 0).")
-            num = input("Please re-enter your desired number (or q to quit): ").strip()
-        if num != 'q':
-            num = int(num)
-            for _ in range(1, num+1):
-                if num % _ == 0:
-                    factors_list.append(_)
-            return factors_list
-        else:
-            break
-    return None
-'''
 
+class Set:
+    def __init__(self, contents: list =[]):
+        self.contents = contents
+
+    def define(self):
+        #prompt to ingest a series of real numbers
+        #check to ensure that these numbers are actually real numbers and not alpha
+        #handle errors
+        #assign set to class attrib AND return Bool to indicate success/failure:
+
+    def maximum(self):
+        #return max value
+
+    def minimum(self):
+        #return min value
 
 def intro():
     print("\n\n\nThis program performs basic set logic.")
@@ -68,21 +65,31 @@ def main_menu_handler(new_set: list) -> str:
         menu_choice = input("SELECTION: ").strip()
     return menu_choice
 
-class Set:
-    def __init__(self, contents: list =[]):
-        self.contents = contents
 
-    def define(self):
-        #prompt to ingest a series of real numbers
-        #check to ensure that these numbers are actually real numbers and not alpha
-        #handle errors
-        #assign set to class attrib AND return Bool to indicate success/failure:
+def create_set() -> list:
+    new_set = []
+'''
+    new_set = input("\nEnter a positive integer to factorize (or q to quit): ").strip()
+    while num != 'q':
+        while not str.isnumeric(num) or int(num) < 1 or num == 'q':
+            print("\nYou must enter a positive integer (i.e., whole number greater than 0).")
+            num = input("Please re-enter your desired number (or q to quit): ").strip()
+        if num != 'q':
+            num = int(num)
+            for _ in range(1, num+1):
+                if num % _ == 0:
+                    factors_list.append(_)
+            return factors_list
+        else:
+            break
+    return None
+'''
 
-    def maximum(self):
-        #return max value
+def delete_set():
 
-    def minimum(self):
-        #return min value
+def intersection():
+
+def union():
 
 if __name__ == "__main__":
     main()

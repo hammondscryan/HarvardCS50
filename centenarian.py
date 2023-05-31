@@ -25,15 +25,21 @@ class User:
         self.name = str.strip(input("Please enter your name:"))
 
     def assign_age(self):
-        acceptable_age = False
-        test_age = input("Please enter your age in years:")
-        while not acceptable_age:
-            if test_age.isnumeric() and int(test_age) >= 0:
-                acceptable_age = True
+        test_age = -1
+        #Fix the code so that an appropriate msg is printed if the user enters a negative number
+        while True:
+            try:
+                test_age = int(input("Please enter your age in years.").strip())
+            except ValueError:
+                print("\nYour age must a positive whole number of years.")
+                pass
             else:
-                print("Your age must a positive whole number of years.")
-                test_age = input("Please re-enter your age:")
-        self.age = int(test_age)
+                if test_age < 0:
+                    print("\nYour age must a positive whole number of years.")
+                else:
+                    break
+
+        self.age = test_age
 
     def calc_100th(self, current_year: int) -> int:
         return current_year + (100-self.age)
