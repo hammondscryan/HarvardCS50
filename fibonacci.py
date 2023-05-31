@@ -7,11 +7,15 @@ def main():
             case 'p':
                 print(f"\n{fib_list}")
             case 'u':
-                print(f"\n{upper_bounded_list(fib_list)}")
+                u_b_list = upper_bounded_list(fib_list)
+                if not u_b_list:
+                    print("The given upper bound is less than the terms in your sequence.")
+                else:
+                    print(f"\n{u_b_list}")
             case 'l':
                 l_b_list = lower_bounded_list(fib_list)
-                if l_b_list is None:
-                    print("\nTHe given lower bound is greater than all terms in your sequence.")
+                if not l_b_list:
+                    print("The given lower bound is greater than the terms in your sequence.")
                 else:
                     print(f"\n{l_b_list}")
             case 'o':
@@ -80,12 +84,8 @@ def upper_bounded_list(fib_list: list) -> list:
         try:
             upper_b = input("\nEnter your desired upper bound: ").strip()
             upper_b = int(upper_b)
-            assert upper_b > 0
         except ValueError:
-            print(f"\nThe upper bound must be a whole number of 1 or greater.")
-            pass
-        except AssertionError:
-            print(f"\nThe upper bound must be a whole number of 1 or greater.")
+            print(f"\nThe upper bound must be a whole number.")
             pass
         else:
             bounded_list = []
@@ -100,38 +100,31 @@ def lower_bounded_list(fib_list: list) -> list:
         try:
             lower_b = input("\nEnter your desired lower bound: ").strip()
             lower_b = int(lower_b)
-            assert lower_b > 0
         except ValueError:
-            print(f"\nThe lower bound must be a whole number of 1 or greater.")
-            pass
-        except AssertionError:
-            print(f"\nThe lower bound must be a whole number of 1 or greater.")
+            print(f"\nThe lower bound must be a whole number.")
             pass
         else:
             bounded_list = []
             for _ in fib_list:
                 if _ >= lower_b:
                     bounded_list.append(_)
-            if not bounded_list:
-                return None
-            else:
-                return bounded_list
+            return bounded_list
 
 
 def odd_list(fib_list: list) -> list:
-    odd_list = []
+    odd_terms = []
     for _ in fib_list:
         if _ % 2 == 1:
-            odd_list.append(_)
-    return odd_list
+            odd_terms.append(_)
+    return odd_terms
 
 
 def even_list(fib_list: list) -> list:
-    even_list = []
+    even_terms = []
     for _ in fib_list:
         if _ % 2 == 0:
-            even_list.append(_)
-    return even_list
+            even_terms.append(_)
+    return even_terms
 
 
 if __name__ == "__main__":
