@@ -207,15 +207,19 @@ def add_set(all_sets: dict):
             pass
         else:
             choice = input("List the desired elements (separated by commas, duplicates allowed).\n"
-                           "Type < to return to the menu.").strip()
+                           "Type 00 for the empty set or < to return to the menu.").strip()
             if choice == '<':
                 print("Returning to the main menu.".upper())
+            elif choice == '00':
+                all_sets[set_name] = Set(set_name)
+                print(f"Success! {set_name} has been added.")
             else:
                 element_list = [x.strip() for x in choice.split(',')]
                 try:
                     for i, entry in enumerate(element_list):
                         element_list[i] = float(entry)
                 except ValueError:
+
                     print("All set elements must be real numbers.".upper())
                     break
                 else:
