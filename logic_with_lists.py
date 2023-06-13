@@ -1,4 +1,31 @@
 
+def main():
+
+    all_sets = dict()
+    print_intro()
+    while True:
+        menu_choice = main_menu_handler()
+        print('\n')
+        match menu_choice:
+            case 'p':
+                print_set(all_sets)
+            case 'x':
+                multiplicity(all_sets)
+            case 'n':
+                add_set(all_sets)
+            case 'd':
+                delete_set(all_sets)
+            case 'i':
+                intersection(all_sets)
+            case 'u':
+                union(all_sets)
+            case 'M':
+                max_calc(all_sets)
+            case 'm':
+                min_calc(all_sets)
+            case 'q':
+                exit("<<<Closing Set Logic Program>>>")
+
 
 class Set:
     def __init__(self, name: str = str(), element_list: list = list()):
@@ -60,34 +87,6 @@ class Set:
             return min(self.element_list)
         else:
             return None
-
-
-def main():
-
-    all_sets = dict()
-    print_intro()
-    while True:
-        menu_choice = main_menu_handler()
-        print('\n')
-        match menu_choice:
-            case 'p':
-                print_set(all_sets)
-            case 'x':
-                multiplicity(all_sets)
-            case 'n':
-                add_set(all_sets)
-            case 'd':
-                delete_set(all_sets)
-            case 'i':
-                intersection(all_sets)
-            case 'u':
-                union(all_sets)
-            case 'M':
-                max_calc(all_sets)
-            case 'm':
-                min_calc(all_sets)
-            case 'q':
-                exit("<<<Closing Set Logic Program>>>")
 
 
 def print_intro():
