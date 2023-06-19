@@ -365,6 +365,7 @@ def max_calc(all_sets: dict):
             sets_to_check = [x.strip() for x in choice.split(',')]
             try:
                 max_elements = list()
+                #max_elements.append(all_sets[a_set].maximum() for a_set in sets_to_check)
                 for a_set in sets_to_check:
                     max_elements.append(all_sets[a_set].maximum())
                 print(f"{max(max_elements)} is the maximum value of the following sets:\n"

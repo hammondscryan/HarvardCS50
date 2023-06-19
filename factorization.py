@@ -12,27 +12,33 @@ def main():
                 exit("<<<Closing factorization program>>>")
 
 
-def create_factors_list() -> list:
+def create_factors_list(num: int = -1) -> list:
     factors_list = []
-    while True:
-        try:
-            num = input("\nEnter a positive integer to factorize (or q to quit): ").strip()
-            num = int(num)
-            assert num > 0
-        except ValueError:
-            if num == 'q':
-                exit("<<<Closing factorization program>>>")
-            else:
+    if num == -1:
+        while True:
+            try:
+                num = input("\nEnter a positive integer to factorize (or q to quit): ").strip()
+                num = int(num)
+                assert num > 0
+            except ValueError:
+                if num == 'q':
+                    exit("<<<Closing factorization program>>>")
+                else:
+                    print("\nYou must enter a positive integer (i.e., whole number greater than 0).")
+                    pass
+            except AssertionError:
                 print("\nYou must enter a positive integer (i.e., whole number greater than 0).")
                 pass
-        except AssertionError:
-            print("\nYou must enter a positive integer (i.e., whole number greater than 0).")
-            pass
-        else:
-            for _ in range(1, num+1):
-                if num % _ == 0:
-                    factors_list.append(_)
-            return factors_list
+            else:
+                for _ in range(1, num+1):
+                    if num % _ == 0:
+                        factors_list.append(_)
+                return factors_list
+    else:
+        for _ in range(1, num + 1):
+            if num % _ == 0:
+                factors_list.append(_)
+        return factors_list
 
 
 def intro():
